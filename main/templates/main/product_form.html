@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ form.instance.id|yesno:"Update Product,Create Product" }}{% endblock %}
+
+{% block content %}
+<h1>{{ form.instance.id|yesno:"Update Product,Create Product" }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{{ form.instance.id|yesno:"Update,Create" }}</button>
+</form>
+{% endblock %}

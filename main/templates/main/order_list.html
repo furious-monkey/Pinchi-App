@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Order List{% endblock %}
+
+{% block content %}
+<h1>Order List</h1>
+{% if user.is_staff %}
+<a href="{% url 'order_create' %}" class="btn btn-primary">Create Order</a>
+{% endif %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Total Price</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+                <a href="{% url 'order_detail' order.id %}" class="btn btn-secondary">View</a>
+                {% if user.is_staff %}
+                <a href="{% url 'order_update' order.id %}" class="btn btn-secondary">Edit</a>
+                <a href="{% url 'order_delete' order.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

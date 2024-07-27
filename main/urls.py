@@ -1,0 +1,33 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('products/', views.product_list, name='product_list'),
+    path('products/<int:id>/', views.product_detail, name='product_detail'),
+    path('products/create/', views.product_create, name='product_create'),
+    path('products/<int:id>/update/', views.product_update, name='product_update'),
+    path('products/<int:id>/delete/', views.product_delete, name='product_delete'),
+    path('cart/', views.cart, name='cart'),
+    path('checkout/', views.checkout, name='checkout'),
+    # path('orders/', views.order_history, name='order_history'),
+    path('orders/', views.order_list, name='order_list'),
+    path('orders/<int:id>/', views.order_detail, name='order_detail'),
+    path('orders/<int:id>/delete/', views.order_delete, name='order_delete'),
+    path('orders/create/', views.order_create, name='order_create'),
+    path('orders/<int:id>/update/', views.order_update, name='order_update'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('profile/', views.profile, name='profile'),
+    path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart, name='cart'),
+    path('cart/update/<int:cart_id>/', views.update_cart, name='update_cart'),
+    path('cart/remove/<int:cart_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('change-password/', views.change_password, name='change_password'),
+    path('verify-email/', views.verify_email, name='verify_email'),
+    path('api/products/', views.ProductListView.as_view(), name='product_list_api'),
+    path('api/products/<int:id>/', views.ProductDetailView.as_view(), name='product_detail_api'),
+    path('api/orders/', views.OrderListView.as_view(), name='order_list_api'),
+    path('api/orders/<int:id>/', views.OrderDetailView.as_view(), name='order_detail_api'),
+]

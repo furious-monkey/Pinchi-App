@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<h1>Product List</h1>
+{% if user.is_staff %}
+<a href="{% url 'product_create' %}" class="btn btn-primary">Add Product</a>
+{% endif %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Department</th>
+            {% if user.is_staff %}
+            <th>Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.department }}</td>
+            {% if user.is_staff %}
+            <td>
+                <a href="{% url 'product_update' product.id %}" class="btn btn-secondary">Edit</a>
+                <a href="{% url 'product_delete' product.id %}" class="btn btn-danger">Delete</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

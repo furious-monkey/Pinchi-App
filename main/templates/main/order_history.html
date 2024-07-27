@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order History</title>
+</head>
+<body>
+    <h1>Order History</h1>
+    <ul>
+        {% for order in orders %}
+            <li>
+                Order #{{ order.id }} - {{ order.order_date }} - ${{ order.total_price }} - {{ order.status }}
+                <ul>
+                    {% for item in order.orderitem_set.all %}
+                        <li>{{ item.product.name }} - ${{ item.price }} x {{ item.quantity }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
